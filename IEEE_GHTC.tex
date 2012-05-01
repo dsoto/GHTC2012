@@ -9,29 +9,25 @@
 \newcommand{\ppv}{P_{pv}}
 \newcommand{\pinv}{P_{inv}}
 
-
 \title{System Efficiency Improvements for Standalone Grid Systems}
 
 \begin{document}
 
-
-
 %\abstract{}
 
-
-\author{
-\IEEEauthorblockN{Daniel Soto}
-\IEEEauthorblockA{
-The Earth Institute\\
-Columbia University\\
-New York, NY 10027}
-\and
-\IEEEauthorblockN{Vijay Modi}
-\IEEEauthorblockA{
-Department of Mechanical Engineering\\
-Columbia, University\\
-New York, NY  10027}
-}
+%\author{
+%\IEEEauthorblockN{Daniel Soto}
+%\IEEEauthorblockA{
+%The Earth Institute\\
+%Columbia University\\
+%New York, NY 10027}
+%\and
+%\IEEEauthorblockN{Vijay Modi}
+%\IEEEauthorblockA{
+%Department of Mechanical Engineering\\
+%Columbia, University\\
+%New York, NY  10027}
+%}
 
 \maketitle
 
@@ -60,7 +56,6 @@ There are many optimizations of system size in the literature
 This work adds to the literature by considering the effects
 of the time of day of usage and the efficiencies of commonly
 used inverters and batteries.
-
 
 %We treat the hourly load profile and its effect on the
 %generation and storage needed.
@@ -93,7 +88,6 @@ used inverters and batteries.
 %The approaches include parallel inverters, inverters with a
 %standby mode, and DC distribution.
 %
-%
 %When electricity is first delivered, use will likely be predominantly
 %at nighttime.
 %This means that there will be long periods of time where the power
@@ -113,7 +107,6 @@ used inverters and batteries.
 %In this paper we describe some of the techno-economic
 %details in the provision of standalone PV systems
 %in rural areas.
-
 
 \section{Microgrid and Data Description}
 \subsection{Data collection}
@@ -178,7 +171,6 @@ on an hourly basis.
 \label{freezer}
 \end{figure}
 
-
 \subsection{Load Duration Curves}
 If we sort the hourly power demand over a long time period, we
 construct a curve called a load duration curve \cite{REEPS}.
@@ -200,7 +192,6 @@ of the inverter.
 Systems with high power variability will lose efficiency since
 the system will often be operated outside of the range of
 peak efficiency.
-
 
 These systems have a 1.4 kWp solar array and an inverter rated
 at 750W.
@@ -249,9 +240,6 @@ ml08 (freezer) & 0.55 & 0.90 \\
 \caption{System Utilization and system efficiency}
 \label{efficiency}
 \end{table}
-
-
-
 
 In ML06, which has considerable daily load, we see an overall
 efficiency of 0.89.
@@ -322,7 +310,6 @@ $$ \pinv = \frac{P_{AC}}{\eta_{inv}(P_{AC})} $$.
 \item $\pinv$ Power demanded by the inverter
 \end{itemize}
 
-
 \begin{figure}[h]
 \begin{center}
 \includegraphics[trim = 0.0in 0.2in 0.0in 0.5in, clip, width=\columnwidth]{figures/simulation.pdf}
@@ -332,12 +319,6 @@ Simulation.
 }
 \label{Graph of simulation output.}
 \end{figure}
-
-\subsection{Baseline System}
-The simulated baseline system is based on the system we have
-installed in the field.
-The inverter efficiencies for this system are shown in Figure
-\ref{inverter_curves}.
 
 \begin{figure}[]
 \begin{center}
@@ -349,37 +330,35 @@ The inverter efficiencies for this system are shown in Figure
 
 \section{Simulation Results}
 
-We compare the results of a baseline system with a typical
-inverter and lead acid battery to a system using an
-power conversion device with flat efficiency curve.
+The simulation results compare the performance of hypothetical
+systems to the baseline system and report potential improvements.
 
-\subsection{Impact of load variation and time on system size}
+\subsection{Baseline System}
+The simulated baseline system is based on the system we have
+installed in the field.
+The inverter efficiencies for this system are shown in Figure
+\ref{inverter_curves}.
+We assume a battery energy efficiency of 75\% round trip.
 
-During the day, current and power flows directly from the output of
-the charge controller, through the inverter to the load.
+\subsection{Impact of time of load on system size}
 
-We look at three loads that take 1 kWh per day.
-The first load is
-evenly distributed throughout the day, the second load is
-consumed in 6 hours after solar production has ceased, and the third
-load is centered around solar noon.
-
-For each of these loads, we calculate the minimum necessary generation
-and storage to satisfy the load.
-This calculation will take into effect the efficiency losses in
-the inverter and the battery.
-
-For these three cases, the generation capacity changes slightly
-to reflect the system efficiencies.
-
-The daytime and nighttime load are hypothetical 1800 Wh loads over a
-6 hour period.
+To demonstrate the effect of the time of day that power 
+is consumed on the generation and storage capacity of the system.
+We calculate the panel and battery size for four loads with 
+the same daily energy but occurring at different times of day.
+The nighttime load has the entire day's load occurring between
+6pm and midnight.
+The daytime load occurs between 9am and 3pm and the constant
+load is evenly spread across the entire day.
+The village load uses a representative day from one of the 
+village microgrids and has a small constant load and a large
+nighttime load.
 
 Table \ref{load_type_impact}, shows the results of simulations
 which demonstrate the variability of panel size and battery
 size with the type of load.
-Each of these loads have the same daily energy total but
-occur at different times of day.
+During the day, current and power flows directly from the output of
+the charge controller, through the inverter to the load.
 This causes about a 10\% variation in panel area and a
 nearly three-fold change in the minimum battery size needed.
 
@@ -394,11 +373,31 @@ Baseline System, Nighttime Load & 2.94 & 3.88 \\
 Baseline System, Constant Load  & 3.05 & 2.46 \\
 Baseline System, Village Load   & 3.08 & 2.93 \\
 \end{tabular}
-\caption{Impact of type of load on system size.
+\caption{Impact of load time-of-day on system size.
 Loads are normalized to 3.0 kWh per day.}
 \label{load_type_impact}
 \end{table}
 
+\subsection{Inverter Efficiency}
+
+A typical inverter is inefficient at loads below its
+preferred operating point.  
+If the load is usually close to this high efficiency
+point, the lower efficiencies at low power are not important.
+If however, as we observe, there is a high variability
+in the power output where daytime loads are very small
+but evening loads are greater, this inefficiency can have
+a significant impact.
+
+To demonstrate this effect, we run our simulation with 
+a hypothetical power conversion device that has an 
+efficiency equal to the peak efficiency of the baseline
+inverter at any power level. 
+
+Table \ref{table_inverter} shows greater reductions 
+in the generation and storage needed for loads that 
+are often below peak, such as the measure village load
+and the continuous load.
 
 \begin{table}
 \centering
@@ -406,22 +405,15 @@ Loads are normalized to 3.0 kWh per day.}
 Configuration & Panel          & Minimum Battery \\
               & Area (m$^2$)   & Size (kWh)      \\
 \hline
-Typical Inverter, Daytime Load   & 2.3 & 0.4 \\
-Typical Inverter, Nighttime Load & 2.9 & 3.3 \\
-Typical Inverter, Constant Load  & 2.6 & 2.0 \\
-Flat Inverter, Daytime Load      & 1.7 & 0.5 \\
-Flat Inverter, Nighttime Load    & 2.1 & 2.6 \\
-Flat Inverter, Constant Load     & 1.8 & 1.4 \\
+flat day        & 2.36 & 0.83 \\
+flat night      & 2.45 & 3.36 \\
+flat continuous & 2.30 & 1.86 \\
+flat village    & 2.33 & 2.25 \\
 \end{tabular}
 \caption{Impact of inverter non-ideality on system size}
-\label{sizetable}
+\label{table_inverter}
 \end{table}
 
-For the two types of inverters, the reduction in panel area
-ranges from 27\% to 29\% when using an ideal inverter.
-The impact on battery size can be positive for a daytime
-load but was 21\% for a nighttime load and 30\% for a
-continuous load.
 
 \subsection{Battery Chemistry}
 
@@ -493,7 +485,6 @@ the range of power of interest.
 The no-load dissipation for this device was below our measurement
 capacity of 0.5W.
 
-
 \subsection{Battery Chemistry}
 
 \subsection{Distributed Storage}
@@ -505,8 +496,6 @@ fixed cost of the system.
 
 \subsection{Load Duration Curve}
 
-
-
 What is the impact of this inefficiency on battery life?
 
 We can simulate the effective inverter efficiency for a given
@@ -514,9 +503,6 @@ load profile and inverter curve.
 
 $$ \eta_{effective} = \frac{\sum P_{AC} \cdot \Delta t}
                           {\sum P_{AC} /\eta_{inv} \cdot \Delta t} $$
-
-
-
 
 \subsection{Using Real vs Apparent Power}
 Almost all loads used by customers in our microgrids have power
@@ -526,12 +512,6 @@ and thus the battery supply.
 To properly account for the customer wear and tear on the battery
 it likely makes more sense to charge for apparent power or for
 real power adjusted by power factor.
-
-
-
-
-
-
 
 \section{Summary}
 Hourly demand data for newly electificed communities has been gathered.
