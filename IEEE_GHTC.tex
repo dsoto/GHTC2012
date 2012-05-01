@@ -301,7 +301,7 @@ $$ P_{discharge} = \left\{
 			  \right. $$
 %
 The power demanded by the inverter is calculated using the efficiency
-of the inverter as a function of temperature according to 
+of the inverter as a function of temperature according to
 $$ \pinv = \frac{P_{AC}}{\eta_{inv}(P_{AC})} $$.
 
 \begin{itemize}
@@ -342,15 +342,15 @@ We assume a battery energy efficiency of 75\% round trip.
 
 \subsection{Impact of time of load on system size}
 
-To demonstrate the effect of the time of day that power 
+To demonstrate the effect of the time of day that power
 is consumed on the generation and storage capacity of the system.
-We calculate the panel and battery size for four loads with 
+We calculate the panel and battery size for four loads with
 the same daily energy but occurring at different times of day.
 The nighttime load has the entire day's load occurring between
 6pm and midnight.
 The daytime load occurs between 9am and 3pm and the constant
 load is evenly spread across the entire day.
-The village load uses a representative day from one of the 
+The village load uses a representative day from one of the
 village microgrids and has a small constant load and a large
 nighttime load.
 
@@ -381,7 +381,7 @@ Loads are normalized to 3.0 kWh per day.}
 \subsection{Inverter Efficiency}
 
 A typical inverter is inefficient at loads below its
-preferred operating point.  
+preferred operating point.
 If the load is usually close to this high efficiency
 point, the lower efficiencies at low power are not important.
 If however, as we observe, there is a high variability
@@ -389,13 +389,13 @@ in the power output where daytime loads are very small
 but evening loads are greater, this inefficiency can have
 a significant impact.
 
-To demonstrate this effect, we run our simulation with 
-a hypothetical power conversion device that has an 
+To demonstrate this effect, we run our simulation with
+a hypothetical power conversion device that has an
 efficiency equal to the peak efficiency of the baseline
-inverter at any power level. 
+inverter at any power level.
 
-Table \ref{table_inverter} shows greater reductions 
-in the generation and storage needed for loads that 
+Table \ref{table_inverter} shows greater reductions
+in the generation and storage needed for loads that
 are often below peak, such as the measure village load
 and the continuous load.
 
