@@ -9,7 +9,7 @@
 \newcommand{\ppv}{P_{pv}}
 \newcommand{\pinv}{P_{inv}}
 
-\title{System Efficiency Improvements for Standalone Grid Systems}
+\title{Title}
 
 \begin{document}
 
@@ -414,44 +414,86 @@ flat village    & 2.33 & 2.25 \\
 \label{table_inverter}
 \end{table}
 
-
 \subsection{Battery Chemistry}
 
-Lead acid batteries have round trip energy efficiencies on the
-order of 75\%.
-Lithium-ion chemistry batteries demonstrate better round trip
-efficiencies.
-These efficiencies impact both the storage needs of the system
-and the generation needs of the system.
+The initial battery cost is given by
 
-Results for 95\% efficient battery (compare to baseline).
+$$ C_B = E_{storage} \frac{1}{\eta_B} \frac{1}{DOD_{optimal}} c_B $$
+
+Where $E_{storage}$ is the storage necessary, $\eta_B$ is the
+round trip energy efficiency, $DOD_{optimal}$ is the desired
+operating point of the battery for long life, and $c_B$ is the
+initial cost of the battery per kWh.
+A very important metric however is the life cycle cost of the 
+battery replacement which depends on the cycle life of the battery.
+
+New battery chemistries could reduce the fraction of investment
+that goes toward storage of electricity.
+The incumbent battery technology is sealed lead acid.
+Emerging technologies of interest are Lithium Iron Phosphate
+and Lead Carbon.
+
+Relative to sealed lead acid batteries, LiFePO batteries 
+have better cycle life, higher specific cost, and better
+turnaround efficiency.
+PbC batteries are not yet mature but have improved cycle
+life and likely similar specific cost and turnaround
+efficiency.
+We simulate the impact of these on system size and total cost
+in Table \ref{table_battery}.
+For the case of typical village data, the lifetime cost of 
+lead acid and LFP are similar.
+If PbC batteries are able to maintain their cost while
+improving cycle life, they will provide a clear improvement
+in the life-cycle cost.
 
 \begin{table}
 \centering
-\begin{tabular}{@{} p{0.5\columnwidth}
-                @{} c
-                @{} c @{}}
-Configuration & Panel          & Minimum Battery \\
-              & Area (m$^2$)   & Size (kWh)      \\
-\hline
-Typical Inverter, 95\% Batt, Daytime Load   & 2.2 & 0.4 \\
-Typical Inverter, 95\% Batt, Nighttime Load & 2.3 & 2.6 \\
-Typical Inverter, 95\% Batt, Constant Load  & 2.2 & 1.6 \\
-Typical Inverter, 95\% Batt, Village Load   & 2.5 & 3.4 \\
+\begin{tabular}{@{} l %{0.3\columnwidth}
+                c %p{0.3\columnwidth}
+                c %p{0.3\columnwidth} 
+                c @{}}
+
+Battery Chemistry & Initial Cost & Lifetime & Optimal \\ 
+                  & (USD/kWh)    & (yr)      & DOD\\
+Lead Acid (LA)               & \$140  & 2  &  50\%  \\
+Lithium Iron Phosphate (LFP) & \$1000 & 6  & 100\%   \\ 
+Lead Carbon (PbC)            & \$140  & 6  &  50\%   \\
 \end{tabular}
-\caption{Impact of inverter non-ideality on system size}
-\label{sizetable}
+\caption{Battery Assumptions.}
+\label{table_battery_assumptions}
 \end{table}
 
+\begin{table*}[!t]
+\centering
+\begin{tabular}{ c  c
+                 c 
+                 c c}
+Load Type & Battery & Panel          & Minimum Battery & Battery NPV\\
+                    & Area (m$^2$)   & Size (kWh)      \\
+\hline
+typical day & lead acid          & 2.97 & 0.76 & 1305 \\
+typical day & LFP                & 2.83 & 0.76 & 1824 \\
+typical day & lead carbon        & 2.97 & 0.76 & 514 \\
 
-While lithium batteries are a factor of XX more expensive
-than lead-acid batteries based on the capacity of the battery
-(USD/kWh), the cost per delivered watt-hour of electricity
-over the lifetime of the battery is comparable.
-Additional economic improvement is gained by lower weight
-for shipping and improved round trip efficiency which lowers
-both the battery capacity and the generation capacity when nighttime
-loads are needed.
+typical night & lead acid        & 3.69 & 4.92 & 8421 \\
+typical night & LFP              & 2.94 & 3.88 & 9338 \\
+typical night & lead carbon      & 3.69 & 4.92 & 3312 \\
+
+typical continuous & lead acid   & 3.52 & 3.08 & 5281 \\
+typical continuous & LFP         & 3.05 & 2.46 & 5931 \\
+typical continuous & lead carbon & 3.52 & 3.08 & 2077 \\
+
+typical village & lead acid      & 3.64 & 3.66 & 6270 \\
+typical village & LFP            & 3.08 & 2.93 & 7043 \\
+typical village & lead carbon    & 3.64 & 3.66 & 2466 \\
+\end{tabular}
+\caption{Simulation results for battery chemistries.
+Net present value is calculated at 7\% over 20 year 
+time horizon.}
+\label{table_battery}
+\end{table*}
+
 
 \section{Discussion}
 Here we discuss what methods are available to mitigate the
@@ -477,6 +519,18 @@ The standby loss could be low but an small use will energize the
 entire system.
 
 \subsubsection{DC Distribution}
+
+Since both the generation and consumption of electricity in our
+sites is in the form of DC electricity, it is natural to
+question the necessity of the inverter.
+In addition to inefficiency of conversion from DC to AC at the
+generation side and from AC to DC at the consumption side,
+these DC loads have less than unity power factor which further
+lowers the efficiency of the inverter.
+In areas where connection to the grid is extremely unlikely
+in the future, an all DC distribution system is worthy of
+serious consideration.
+
 If the efficiency curve of a DC/DC converter were favorable,
 a high-voltage direct current (HVDC) distribution scheme could
 be used.
@@ -485,7 +539,22 @@ the range of power of interest.
 The no-load dissipation for this device was below our measurement
 capacity of 0.5W.
 
+
 \subsection{Battery Chemistry}
+
+% lithium iron phosphate
+% 0.40-2 USD/Wh
+% 2000 cycles
+% optimal DOD 100%
+
+% lead acid
+% 0.14 USD/Wh
+% 500-800 cycles
+% optimal DOD 50%
+
+% lead carbon
+% 
+% 2000 cycles @ 100% DOD
 
 \subsection{Distributed Storage}
 Another possibility is local storage at the home with a small inverter
@@ -494,15 +563,16 @@ is needed.
 This reduces the standby load to zero but likely adds to the
 fixed cost of the system.
 
-\subsection{Load Duration Curve}
+\subsection{Load Shaping}
 
-What is the impact of this inefficiency on battery life?
+A strategy for improving the overall efficiency of the system
+is to schedule consumer loads such that the load profile is
+more constant.
+In the context of remote villages, the initial loads are mostly
+lighting and entertainment in the evening and have very limited
+capacity for rescheduling.
+Another strategy is to create daytime loads.
 
-We can simulate the effective inverter efficiency for a given
-load profile and inverter curve.
-
-$$ \eta_{effective} = \frac{\sum P_{AC} \cdot \Delta t}
-                          {\sum P_{AC} /\eta_{inv} \cdot \Delta t} $$
 
 \subsection{Using Real vs Apparent Power}
 Almost all loads used by customers in our microgrids have power
@@ -517,6 +587,10 @@ real power adjusted by power factor.
 Hourly demand data for newly electificed communities has been gathered.
 We find that improving no-load and low load power consumption of the
 inverter can reduce storage and generation needs.
+
+technology \& cost improvement from baseline \\
+slaved inverters \& xx\% \\
+
 
 \begin{thebibliography}{1}
 \bibitem{optimizations}
@@ -565,3 +639,18 @@ at a low fraction of its capacity.
 %$$ \ppv = insolation \cdot array size \cdot array efficiency
 %         \cdot controller efficiency $$
 
+
+We can simulate the effective inverter efficiency for a given
+load profile and inverter curve.
+
+$$ \eta_{effective} = \frac{\sum P_{AC} \cdot \Delta t}
+                          {\sum P_{AC} /\eta_{inv} \cdot \Delta t} $$
+
+While lithium batteries are a factor of XX more expensive
+than lead-acid batteries based on the capacity of the battery
+(USD/kWh), the cost per delivered watt-hour of electricity
+over the lifetime of the battery is comparable.
+Additional economic improvement is gained by lower weight
+for shipping and improved round trip efficiency which lowers
+both the battery capacity and the generation capacity when nighttime
+loads are needed.
