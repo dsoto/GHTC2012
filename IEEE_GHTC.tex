@@ -10,6 +10,8 @@
 \newcommand{\pinv}{P_{inv}}
 
 \title{Title}
+%\title{Efficiency Improvements and Simulations using Measured Microgrid Data}
+%\title{}
 
 \begin{document}
 
@@ -115,7 +117,8 @@ for storage.
 \section{Microgrid and Data Description}
 The simulations in this paper will use data collected from 
 Mali.
-This section describes the microgrid systems that this data
+This section describes the solar photovoltaic microgrid 
+systems that this data
 is taken from.
 It will also describe some of the notable features in the data.
 
@@ -354,6 +357,18 @@ Lead Carbon (PbC)            & \$140  & 6  &  50\%  & 75\%  \\
 \begin{table}
 \centering
 \begin{tabular}{ c c }
+Rated Power               & 750 W \\
+Peak Efficiency           & 94\%  \\
+No-load Power Consumption & 13 W  \\ 
+\end{tabular}
+\caption{Inverter Assumptions for Modeling.}
+\label{tbl_inverter_assumptions}
+\end{table}
+
+
+\begin{table}
+\centering
+\begin{tabular}{ c c }
 Panel Efficiency       & 13.5\% \\
 Panel Latitude         & 14 N  \\ 
 Panel Cost             & \$1/W  \\
@@ -389,7 +404,7 @@ improvements discussed below.
 \label{inverter_curves}
 \end{figure}
 
-\subsection{Impact of time of load on system size}
+\subsection{Impact of load shape}
 
 The storage and generation necessary to service a given daily
 amount of energy can vary depending on what time of day
@@ -398,10 +413,10 @@ To demonstrate the effect of the time of day that power
 is consumed on the generation and storage capacity of the system,
 we calculate the panel and battery size for four loads with
 the same total daily energy but occurring at different times of day.
-We define a nighttime load that has the entire day's load 
+We define a ``Night'' load that has the entire day's load 
 occurring between 6pm and midnight.
-We also define a daytime load that occurs between 9am and 3pm 
-and a constant load that is evenly spread across the entire day.
+We also define a ``Day'' load that occurs between 9am and 3pm 
+and a ``Constant'' load that is evenly spread across the entire day.
 
 In addition to these three hypothetical loads, we also use loads
 representative of the measured customer loads at our microgrids. 
@@ -411,18 +426,26 @@ nighttime load.
 The ``Freezer'' village load is from one of our microgrids using a freezer
 to provide ice for sale.
 
-%Table \ref{tbl_baseline} 
-Figure \ref{fig_baseline} 
-shows the results of simulations
+Table \ref{tbl_baseline} shows a detailed output of the panel and
+battery sizes and NPV costs over an assumed 20 year lifetime
 which demonstrate the variability of panel size and battery
 size with the type of load.
+Figure \ref{fig_baseline} 
+shows these results in terms of an estimated cost of delivered
+electricity.
+Only in the ``Day'' load is the generation cost a significant
+fraction of the total cost.
+There are variations in the size and price of the panel
+necessary to meet the load, but the cost impact is small
+compared to the storage costs.
+For the other loads, the storage cost is dominant.
+Note that we do not include balance of system costs or 
+distribution costs since these will be much less sensitive
+to these load types.
 The lowest total cost is delivered for the ``Day'' load
 since there is very little storage necessary.
 The highest total cost is incurred for the ``Night'' load since
 the storage demand is the greatest.
-There are variations in the size and price of the panel
-necessary to meet the load, but the cost impact is small
-compared to the storage costs.
 
 
 \begin{figure}[]
@@ -453,6 +476,8 @@ Loads are normalized to 3.0 kWh per day.}
 
 \subsection{Inverter Efficiency}
 
+In a system with a wide variation in power levels the inverter can
+be a significant loss of power.
 A typical inverter is inefficient at loads below its
 preferred operating point.
 If the load is usually close to this high efficiency
@@ -461,7 +486,6 @@ If however, as we observe, there is a high variability
 in the power output where daytime loads are very small
 but evening loads are greater, this inefficiency can have
 a significant impact.
-
 If the system is run inefficiently during the daytime, the inefficiency
 burden only impacts the amount of generation capacity needed.
 If the system is run inefficiently during the evening, both the
@@ -469,17 +493,20 @@ generation and the storage costs are affected, multiplying the
 penalty.
 Late-night and early morning cellphone charging and vampire
 loads can cause this inefficiency.
-
 To demonstrate this effect, we run our simulation with
 a hypothetical power conversion device that has an
 efficiency equal to the peak efficiency of the baseline
 inverter at any power level.
-
-%Table \ref{table_inverter} 
+Table \ref{table_inverter} shows the detailed simulation
+results.
+The increase in inverter efficiency reduces the generation
+and storage needed for four of the five load types.
+The reductions in battery NPV and solar NPV could offset the
+additional cost of a dedicated low-power inverter with a cross
+over circuit for when the load requires the high-power inverter.
 Figure \ref{fig_inverter}
-shows the in delivered price for loads that
-are often below peak, such as the measured village load
-and the continuous load.
+shows the impact on delivered price for the five loads we
+consider in this work.
 
 \begin{figure}[]
 \begin{center}
@@ -489,7 +516,6 @@ and the continuous load.
 inverter and battery system and hypothetical and measured loads.}
 \label{fig_inverter}
 \end{figure}
-
 
 \begin{table*}
 \centering
@@ -509,16 +535,16 @@ flat village lead acid         & 0.55 & 2.81 & 4819 & 553 \\
 
 \subsection{Battery Chemistry}
 
-The initial battery cost is given by
-
-$$ C_B = E_{storage} \frac{1}{\eta_B} \frac{1}{DOD_{optimal}} c_B $$
-
-Where $E_{storage}$ is the storage necessary, $\eta_B$ is the
-round trip energy efficiency, $DOD_{optimal}$ is the desired
-operating point of the battery for long life, and $c_B$ is the
-initial cost of the battery per kWh.
-A very important metric however is the life cycle cost of the 
-battery replacement which depends on the cycle life of the battery.
+The largest potential for cost reduction can come from improved
+battery technologies.
+Current lead acid technologies must be replaced every 2--3 years
+depending on the environment \cite{lead acid battery life}.
+In terms of initial cost, batteries are comparable to the photovoltaic
+panel cost but their frequent replacement makes the storage cost
+dominant over the lifetime of the system.
+Differences in allowable depth of discharge (DOD) and the round-trip
+energy efficiency of the battery can also influence the lifetime
+cost of the storage.
 
 New battery chemistries could reduce the fraction of investment
 that goes toward storage of electricity.
@@ -529,11 +555,30 @@ and Lead Carbon.
 Relative to sealed lead acid batteries, LiFePO batteries 
 have better cycle life, higher specific cost, and better
 turnaround efficiency.
-PbC batteries are not yet mature but have improved cycle
+PbC batteries are not yet mature but promise improved cycle
 life and likely similar specific cost and turnaround
 efficiency.
 The assumptions for the battery types in the simulation
 are found in Table \ref{table_battery_assumptions}.
+
+The initial battery cost is given by
+%
+$$ C_B = E_{storage} \frac{1}{\eta_B} \frac{1}{DOD_{optimal}} c_B $$
+%
+Where $E_{storage}$ is the storage necessary, $\eta_B$ is the
+round trip energy efficiency, $DOD_{optimal}$ is the desired
+operating point of the battery for long life, and $c_B$ is the
+initial cost of the battery per kWh.
+A very important metric however is the life cycle cost of the 
+battery replacement which depends on the cycle life of the battery.
+
+The life cycle cost is the net present value (NPV) of the 
+initial and replacement battery expenditures over the life 
+of the system.  
+In this simulation we use a 7\% discount factor and a 20-year
+system lifetime.
+The baseline inverter is used in these simulations.
+
 We simulate the impact of these on system size and total cost
 in Table \ref{table_battery}.
 For the case of typical village data, the lifetime cost of 
@@ -541,6 +586,14 @@ lead acid and LFP are similar.
 If PbC batteries are able to maintain their cost while
 improving cycle life, they will provide a clear improvement
 in the life-cycle cost.
+
+\begin{figure}[]
+\begin{center}
+\includegraphics[width=\columnwidth]{figures/battery.pdf}
+\end{center}
+\caption{Cost of electricity for different battery chemistries.}
+\label{fig_battery}
+\end{figure}
 
 
 \begin{table*}[!t]
@@ -586,6 +639,10 @@ technology \& cost improvement from baseline \\
 slaved inverters    \& xx\% \\
 LFP battery         \& xx\% \\
 Lead Carbon Battery \& xx\% \\
+
+
+%\section{Acknowledgements}
+
 
 
 \begin{thebibliography}{1}
