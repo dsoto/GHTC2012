@@ -256,32 +256,23 @@ efficiency of 0.89.
 In ML05, with much less daily load, the overall efficiency
 is 0.78.
 
-\section{System and Simulation Description}
+\section{Simulation Description}
 
 We examine the effect of load variation and alternate technologies
-by creating a simulation of the system.
-The model uses energy as the quanitity being modeled.
+on the size and cost of the system by creating an 
+energy simulation of the system.
 The simulation finds the minimum panel size and battery capacity
 that will meet the demand assuming clear-sky radiation.
-The model is intended to allow comparisons between systems and
+This model is intended to allow comparisons between systems and
 load profiles rather than provide accurate guidance for system
 sizes over a typical meteorological year.
 The simulation takes as input the hourly load profile from a
-set of customers.
-In the following simulations we use both measured and simulated
-loads.
-Based on the hourly load profile, the energy in the battery
-is simulated.
+set of either real or hypothetical customers.
+The model then uses a series of assumptions on battery and solar
+panel parameters to calculate the power and storage at each hour.
 The battery is considered to be a simple energy storage device
 with perfect efficiency during charging and an efficiency of
 $\eta_B$ on discharge.
-The panel size in the model is adjusted until the energy remaining
-in the battery at the end of the simulation is equal to the
-energy at the start of the simulation.
-The minimum battery size is then the peak-to-peak variation
-of the battery energy time series.
-A time series trace is shown in Figure \ref{simulation}.
-
 We can calculate the energy in the battery in discrete time
 steps according to the following equation.
 %
@@ -312,18 +303,30 @@ $$ P_{discharge} = \left\{
 %
 The power demanded by the inverter is calculated using the efficiency
 of the inverter as a function of temperature according to
-$$ \pinv = \frac{P_{AC}}{\eta_{inv}(P_{AC})} $$.
+$$ \pinv = \frac{P_{AC}}{\eta_{inv}(P_{AC})} $$
+%
+Where $P_{AC}$ is the hourly power demanded by the consumers of the microgrid.
 
-\begin{itemize}
-\item $E_B(t)$ the battery energy available at time $t$
-\item $\ppv$ Power produced by the PV panel
-\item $\pinv$ Power demanded by the inverter
-\end{itemize}
-
+The difference equation is run in a loop where the 
+panel size in the model is adjusted until the energy remaining
+in the battery at the end of the simulation is equal to the
+energy at the start of the simulation.
+The minimum battery size is then the peak-to-peak variation
+of the battery energy time series.
+A time series trace is shown in Figure \ref{simulation}.
 Once the simulation finds a solution where the starting and final
 storage are equal, the model outputs the minimum battery size
 to meet the storage need at 100\% depth of discharge and the 
 minimum solar panel size to meet the demand.
+Based on panel size and battery size output along with the 
+assumptions on panel cost and battery cost and life, the model 
+predicts the net present value (NPV) of the system over the 
+life of the system.
+In this model we use a 7\% discount factor and a 20-year time
+horizon.
+The battery assumptions for these simulations are listed in 
+Table \ref{table_battery_assumptions} and the panel assumptions 
+are listed in Table \ref{table_panel_assumptions}.
 
 \begin{figure}[h]
 \begin{center}
@@ -335,13 +338,31 @@ Time series of simulation.
 \label{simulation}
 \end{figure}
 
-\begin{figure}[]
-\begin{center}
-\includegraphics[width=\columnwidth]{figures/inverter_curves.pdf}
-\end{center}
-\caption{Efficiency curves for baseline and proposed system.}
-\label{inverter_curves}
-\end{figure}
+\begin{table*}
+\centering
+\begin{tabular}{ c c c c c }
+Battery Chemistry & Initial Cost & Lifetime & Optimal & Storage \\ 
+                  & (USD/kWh)    & (yr)     & DOD     & Efficiency\\
+Sealed Lead Acid (SLA)       & \$140  & 2  &  50\%  & 75\%  \\
+Lithium Iron Phosphate (LFP) & \$1000 & 6  & 100\%  & 95\%  \\ 
+Lead Carbon (PbC)            & \$140  & 6  &  50\%  & 75\%  \\
+\end{tabular}
+\caption{Battery Assumptions for Modeling.}
+\label{table_battery_assumptions}
+\end{table*}
+
+\begin{table}
+\centering
+\begin{tabular}{ c c }
+Panel Efficiency       & 13.5\% \\
+Panel Latitude         & 14 N  \\ 
+Panel Cost             & \$1/W  \\
+Panel Lifetime         & 20 years \\
+\end{tabular}
+\caption{Solar Panel Assumptions for Modeling.}
+\label{table_panel_assumptions}
+\end{table}
+
 
 \section{Calculation Results and Discussion}
 
@@ -351,41 +372,67 @@ systems to the baseline system and report potential improvements.
 \subsection{Baseline System}
 The simulated baseline system is based on the system we have
 installed in the field.
-The inverter efficiencies for this system are shown in Figure
-\ref{inverter_curves}.
-We assume a battery energy efficiency of 75\% round trip.
-The battery and inverter used in this baseline scenario
-is modeled after the system in the field and will be used
-in comparisons against hypothetical improvements.
+The inverter efficiency for this baseline system is shown in Figure
+\ref{inverter_curves} as the ``Baseline'' curve.
+The battery used in the baseline system is the Sealed Lead Acid
+battery in Table \ref{table_battery_assumptions}.
+The solar panel assumptions used in the baseline and all other
+simulations are listed in Tabel \ref{table_panel_assumptions}.
+This baseline system is used for comparison against the
+improvements discussed below.
+
+\begin{figure}[]
+\begin{center}
+\includegraphics[width=\columnwidth]{figures/inverter_curves.pdf}
+\end{center}
+\caption{Efficiency curves for baseline and proposed system.}
+\label{inverter_curves}
+\end{figure}
 
 \subsection{Impact of time of load on system size}
 
+The storage and generation necessary to service a given daily
+amount of energy can vary depending on what time of day
+that energy is delivered.
 To demonstrate the effect of the time of day that power
-is consumed on the generation and storage capacity of the system.
-We calculate the panel and battery size for four loads with
-the same daily energy but occurring at different times of day.
-The nighttime load has the entire day's load occurring between
-6pm and midnight.
-The daytime load occurs between 9am and 3pm and the constant
-load is evenly spread across the entire day.
-The village load uses a representative day from one of the
+is consumed on the generation and storage capacity of the system,
+we calculate the panel and battery size for four loads with
+the same total daily energy but occurring at different times of day.
+We define a nighttime load that has the entire day's load 
+occurring between 6pm and midnight.
+We also define a daytime load that occurs between 9am and 3pm 
+and a constant load that is evenly spread across the entire day.
+
+In addition to these three hypothetical loads, we also use loads
+representative of the measured customer loads at our microgrids. 
+The ``Lighting'' village load uses a representative day from one of the
 village microgrids and has a small constant load and a large
 nighttime load.
+The ``Freezer'' village load is from one of our microgrids using a freezer
+to provide ice for sale.
 
-Table \ref{table_baseline} shows the results of simulations
+%Table \ref{tbl_baseline} 
+Figure \ref{fig_baseline} 
+shows the results of simulations
 which demonstrate the variability of panel size and battery
 size with the type of load.
-During the day, current and power flows directly from the output of
-the charge controller, through the inverter to the load.
-This causes about a 10\% variation in panel area and a
-nearly three-fold change in the minimum battery size needed.
+The lowest total cost is delivered for the ``Day'' load
+since there is very little storage necessary.
+The highest total cost is incurred for the ``Night'' load since
+the storage demand is the greatest.
+There are variations in the size and price of the panel
+necessary to meet the load, but the cost impact is small
+compared to the storage costs.
 
-Since the total daily energy in these systems is the same,
-the resulting per kWh cost of electricity is greater for the 
-system with night time usage.
 
-We also note that the daytime load decreases the solar panel
-size and cost since the battery inefficiency is removed.
+\begin{figure}[]
+\begin{center}
+\includegraphics[width=\columnwidth]{figures/baseline.pdf}
+\end{center}
+\caption{Cost of electricity for different load profiles using Baseline 
+inverter and battery system and hypothetical and measured loads.}
+\label{fig_baseline}
+\end{figure}
 
 \begin{table*}
 \centering
@@ -401,7 +448,7 @@ typical village lead acid      & 0.73 & 3.66 & 6270 & 727 \\
 \end{tabular}
 \caption{Impact of load time-of-day on system size.
 Loads are normalized to 3.0 kWh per day.}
-\label{table_baseline}
+\label{tbl_baseline}
 \end{table*}
 
 \subsection{Inverter Efficiency}
@@ -428,7 +475,7 @@ inverter at any power level.
 
 Table \ref{table_inverter} shows greater reductions
 in the generation and storage needed for loads that
-are often below peak, such as the measure village load
+are often below peak, such as the measured village load
 and the continuous load.
 
 \begin{table*}
@@ -482,22 +529,6 @@ If PbC batteries are able to maintain their cost while
 improving cycle life, they will provide a clear improvement
 in the life-cycle cost.
 
-\begin{table}
-\centering
-\begin{tabular}{@{} l %{0.3\columnwidth}
-                c %p{0.3\columnwidth}
-                c %p{0.3\columnwidth} 
-                c @{}}
-
-Battery Chemistry & Initial Cost & Lifetime & Optimal \\ 
-                  & (USD/kWh)    & (yr)      & DOD\\
-Lead Acid (LA)               & \$140  & 2  &  50\%  \\
-Lithium Iron Phosphate (LFP) & \$1000 & 6  & 100\%   \\ 
-Lead Carbon (PbC)            & \$140  & 6  &  50\%   \\
-\end{tabular}
-\caption{Battery Assumptions.}
-\label{table_battery_assumptions}
-\end{table}
 
 \begin{table*}[!t]
 \centering
@@ -518,7 +549,7 @@ time horizon.}
 \end{table*}
 
 
-\section{Discussion}
+\section{Discussion / Future Work}
 While the simulation results discussed are speculative, 
 we believe that experimentation in this regime is important.
 
@@ -541,43 +572,8 @@ be more efficient.
 The standby loss could be low but an small use will energize the
 entire system.
 
-\subsection{DC Distribution}
-
-Since both the generation and consumption of electricity in our
-sites is in the form of DC electricity, it is natural to
-question the necessity of the inverter.
-In addition to inefficiency of conversion from DC to AC at the
-generation side and from AC to DC at the consumption side,
-these DC loads have less than unity power factor which further
-lowers the efficiency of the inverter.
-In areas where connection to the grid is extremely unlikely
-in the future, an all DC distribution system is worthy of
-serious consideration.
-
-If the efficiency curve of a DC/DC converter were favorable,
-a high-voltage direct current (HVDC) distribution scheme could
-be used.
-Our testing of a 48 VDC to 12 VDC converter is over 80\% for
-the range of power of interest.
-The no-load dissipation for this device was below our measurement
-capacity of 0.5W.
 
 
-\subsection{Battery Chemistry}
-
-% lithium iron phosphate
-% 0.40-2 USD/Wh
-% 2000 cycles
-% optimal DOD 100%
-
-% lead acid
-% 0.14 USD/Wh
-% 500-800 cycles
-% optimal DOD 50%
-
-% lead carbon
-% 
-% 2000 cycles @ 100% DOD
 
 \subsection{Distributed Storage}
 Another possibility is local storage at the home with a small inverter
@@ -586,25 +582,6 @@ is needed.
 This reduces the standby load to zero but likely adds to the
 fixed cost of the system.
 
-\subsection{Load Shaping}
-
-A strategy for improving the overall efficiency of the system
-is to schedule consumer loads such that the load profile is
-more constant.
-In the context of remote villages, the initial loads are mostly
-lighting and entertainment in the evening and have very limited
-capacity for rescheduling.
-Another strategy is to create daytime loads.
-
-
-\subsection{Using Real vs Apparent Power}
-Almost all loads used by customers in our microgrids have power
-factors below one.
-These switching power supplies negatively affect inverter efficiency
-and thus the battery supply.
-To properly account for the customer wear and tear on the battery
-it likely makes more sense to charge for apparent power or for
-real power adjusted by power factor.
 
 \section{Summary}
 Hourly demand data for newly electificed communities has been gathered.
@@ -687,3 +664,25 @@ Additional economic improvement is gained by lower weight
 for shipping and improved round trip efficiency which lowers
 both the battery capacity and the generation capacity when nighttime
 loads are needed.
+
+
+\subsection{DC Distribution}
+
+Since both the generation and consumption of electricity in our
+sites is in the form of DC electricity, it is natural to
+question the necessity of the inverter.
+In addition to inefficiency of conversion from DC to AC at the
+generation side and from AC to DC at the consumption side,
+these DC loads have less than unity power factor which further
+lowers the efficiency of the inverter.
+In areas where connection to the grid is extremely unlikely
+in the future, an all DC distribution system is worthy of
+serious consideration.
+
+If the efficiency curve of a DC/DC converter were favorable,
+a high-voltage direct current (HVDC) distribution scheme could
+be used.
+Our testing of a 48 VDC to 12 VDC converter is over 80\% for
+the range of power of interest.
+The no-load dissipation for this device was below our measurement
+capacity of 0.5W.
