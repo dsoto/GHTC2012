@@ -566,34 +566,7 @@ time horizon.}
 While the simulation results discussed are speculative, 
 we believe that experimentation in this regime is important.
 
-\subsection{Mitigating Load Variation}
-Systems with better no-load performance should be used to counteract
-the problem of efficiency at the lower end.
 
-Two solutions exist for this problem, the first is to remove
-the constant loads (meter electronics, communication, and
-computing) from the inverter.
-This could allow an inverter to operate in a power-down or
-search mode for most of the time and then switch on only
-to service loads.
-
-\subsection{Slaved inverters}
-A chain of inverters that turn on in a cascaded fashion could
-be more efficient.
-
-\subsection{Inverters with Standby Mode}
-The standby loss could be low but an small use will energize the
-entire system.
-
-
-
-
-\subsection{Distributed Storage}
-Another possibility is local storage at the home with a small inverter
-that the customer only switches on during times when power
-is needed.
-This reduces the standby load to zero but likely adds to the
-fixed cost of the system.
 
 
 \section{Summary}
@@ -699,3 +672,32 @@ Our testing of a 48 VDC to 12 VDC converter is over 80\% for
 the range of power of interest.
 The no-load dissipation for this device was below our measurement
 capacity of 0.5W.
+
+\subsection{Mitigating Load Variation}
+Systems with better no-load performance should be used to counteract
+the problem of efficiency at the lower end.
+
+Two solutions exist for this problem, the first is to remove
+the constant loads (meter electronics, communication, and
+computing) from the inverter.
+This could allow an inverter to operate in a power-down or
+search mode for most of the time and then switch on only
+to service loads.
+
+\subsection{Slaved inverters}
+A chain of inverters that turn on in a cascaded fashion could
+be more efficient.
+
+\subsection{Inverters with Standby Mode}
+The standby loss could be low but an small use will energize the
+entire system.
+
+
+
+
+\subsection{Distributed Storage}
+Another possibility is local storage at the home with a small inverter
+that the customer only switches on during times when power
+is needed.
+This reduces the standby load to zero but likely adds to the
+fixed cost of the system.
