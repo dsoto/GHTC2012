@@ -1,45 +1,43 @@
 \documentclass[conference]{IEEEtran}
 %\documentclass[journal]{IEEEtran}
+
 \usepackage{graphicx}
-%\documentclass[]{article}
-
-%\usepackage{draftwatermark}\SetWatermarkText{Not For Distribution}
-%\SetWatermarkScale{2}\SetWatermarkLightness{0.85}
-
 \newcommand{\ppv}{P_{pv}}
 \newcommand{\pinv}{P_{inv}}
 
-\title{Title}
-%\title{Efficiency Improvements and Simulations using Measured Microgrid Data}
-%\title{}
+\title{Simulations of Efficiency Improvements using Measured Microgrid Data}
 
 \begin{document}
 
-%\abstract{}
-
-%\author{
-%\IEEEauthorblockN{Daniel Soto}
-%\IEEEauthorblockA{
-%The Earth Institute\\
-%Columbia University\\
-%New York, NY 10027}
-%\and
-%\IEEEauthorblockN{Vijay Modi}
-%\IEEEauthorblockA{
-%Department of Mechanical Engineering\\
-%Columbia, University\\
-%New York, NY  10027}
-%}
+\author{
+\IEEEauthorblockN{Daniel Soto}
+\IEEEauthorblockA{
+The Earth Institute\\
+Columbia University\\
+New York, NY 10027}
+\and
+\IEEEauthorblockN{Vijay Modi}
+\IEEEauthorblockA{
+Department of Mechanical Engineering\\
+Columbia, University\\
+New York, NY  10027}
+}
 
 \maketitle
 
 \begin{abstract}
+Reaching unelectrified populations in the developing world
+with distributed solar requires agressive cost optimization of
+generation and storage. 
 Conventional solar generation architectures using photovoltaic
 panels, sealed lead acid batteries, and inverters show room for
 cost improvement.
 Using data collected from photovoltaic microgrid users and simulations
 we demonstrate potential cost reductions using alternate 
 technologies and architectures.
+Reducing losses from power conversion could lower wholesale energy
+costs by 20\% while improved battery chemistries could lower
+costs by up to 50\%. 
 \end{abstract}
 
 \section{Introduction}
@@ -115,16 +113,21 @@ for storage.
 
 
 \section{Microgrid and Data Description}
+
 The simulations in this paper will use data collected from 
 Mali.
 This section describes the solar photovoltaic microgrid 
-systems that this data
-is taken from.
+systems that this data is taken from.
 It will also describe some of the notable features in the data.
 
 \subsection{Data collection}
-We have installed 17 microgrid systems with remote connectivity
-in Mali and Uganda \cite{ICTD}.
+We have installed 17 solar photovoltaic microgrid systems 
+with remote connectivity using Short Message Service (SMS)
+over the Global System for Mobile Communications (GSM) network
+in Mali and Uganda as described in \cite{ICTD}.
+These systems allow customers to purchase bundles of 
+electricity in advance of use either through a scratch card and 
+cell phone purchase or through a tablet device.
 Each of these systems consists of a 1.4 kWp array of photovoltaic
 panels with a 48 V, 360 Ah battery bank.
 An MPPT charge controller handles battery charging and a
@@ -135,23 +138,32 @@ central facility.
 Each customer is metered by a commercially available device that
 allows for energy measurement and reporting and a switch to
 automatically connect or disconnect the consumer.
-These systems send data on an hourly basis to a central server
+In addition to communication regarding the purchase of power,
+these systems send data on an hourly basis to a central server
 using SMS messages.
 Data is collected on the energy consumption of each household
 as well as the AC energy consumption of the entire system.
 From the solar controller, we measure and store hourly information
 on the solar energy delivered to the system and the battery
 voltage.
+This data stream allows us to observe consumer usage and payment
+behavior.
 
 \subsection{Timeseries Description}
 These messages allow us to create a database of timeseries
 information from the customers.
-For most customers, the peak power is consumed in the evening
+In this paper we focus on the data from a few microgrids in 
+Mali that is representative of the demand from rural residential
+customers.
+In these residential settings, the most common appliances are
+light bulbs, cellphones, and televisions.
+Consequently, the peak power is consumed in the evening
 as shown in Figure \ref{two-bulb-profile}.
+Customers in these microgrids were provided with two light bulbs
+as part of the installation.
+In Figure \ref{two-bulb-profile}, the two bands in the evening show
+that usage clusters around these values.
 Most of the customers have little or no usage during the day time.
-The system however, uses about 50W to run the metering, computation,
-and communication electronics giving a similar profile but with
-a larger daytime use.
 
 \begin{figure}[h]
 \begin{center}
@@ -169,8 +181,11 @@ This not that this customer has very small power use during the day.}
 \label{two-bulb-profile}
 \end{figure}
 
-We have provided two freezers that customers are using to
+The addition of daytime loads can help even out the variations
+in demand.
+In two microgrid systems, freezers have been installed that customers are using to
 sell ice or frozen drinks.
+These freezers significantly increase the daytime load on the system.
 The hourly profile for the household using this freezer
 is shown in Figure \ref{freezer}.
 These freezers draw a much larger amount of power than the
@@ -187,10 +202,13 @@ Power use is much more consistent.}
 \end{figure}
 
 \subsection{Load Duration Curves}
+
+To visualize the variation in load, we use a load-duration-curve
+to summarize the load demanded by the microgrid.
 If we sort the hourly power demand over a long time period, we
-construct a curve called a load duration curve \cite{REEPS}.
+construct a load duration curve \cite{REEPS}.
 A load-duration curve (Figure \ref{two_ldc}) shows this variation.
-In the microgrid (ml07) that does not have a freezer, the most common
+In the microgrid that does not have a freezer, the most common
 power level is less than 50W, which is well below the peak
 efficiency of the inverter.
 For the system that does have a freezer, the system spends the bulk
@@ -245,19 +263,19 @@ We pursued both a measurement of the systems and a simulation approach.
 \begin{tabular}{c c c}
 Meter & System Utilization Factor & System Efficiency \\
 \hline
-ml03 & 0.38 & 0.62 \\
-ml05 & 0.33 & 0.69 \\
-ml06 (freezer) & 0.54 & 0.88 \\
-ml08 (freezer) & 0.55 & 0.90 \\
+Lighting Only & 0.38 & 0.62 \\
+Lighting Only & 0.33 & 0.69 \\
+Freezer & 0.54 & 0.88 \\
+Freezer & 0.55 & 0.90 \\
 \end{tabular}
 \caption{System Utilization and system efficiency}
 \label{efficiency}
 \end{table}
 
-In ML06, which has considerable daily load, we see an overall
-efficiency of 0.89.
-In ML05, with much less daily load, the overall efficiency
-is 0.78.
+In sites with a freezer and therefore considerable daily load, 
+we see an overall efficiency of 0.88--0.90.
+In a lighting only site, with much less daily load, the overall efficiency
+is less than 0.70.
 
 \section{Simulation Description}
 
@@ -581,11 +599,19 @@ The baseline inverter is used in these simulations.
 
 We simulate the impact of these on system size and total cost
 in Table \ref{table_battery}.
+Figure \ref{fig_battery} shows the impact of battery type on
+the per kWh cost of electricity.
 For the case of typical village data, the lifetime cost of 
 lead acid and LFP are similar.
+If LFP costs reach the \$500/kWh cost targets mentioned in
+the context of electric vehicles, these batteries will 
+be a clear choice.
 If PbC batteries are able to maintain their cost while
 improving cycle life, they will provide a clear improvement
 in the life-cycle cost.
+Both of these battery simulations are speculative but given
+the dominance of storage costs in these systems, attention
+to emerging battery technologies is worthwhile.
 
 \begin{figure}[]
 \begin{center}
@@ -618,30 +644,38 @@ time horizon.}
 \section{Discussion / Future Work}
 While the simulation results discussed are speculative, 
 we believe that experimentation in this regime is important.
+We have emphasized supply and generation optimizations in
+this work but would like to point out the importance of 
+efficient appliances.
+Efficient appliances allow services to be delivered at the
+lowest possible price.
+Our microgrids use LED lighting to achieve the best cost for
+lighting in terms of price per kilolumen-hour delivered.
+The televisions that we have observed in these microgrids 
+have been inefficient cathode ray tube (CRT) televisions
+with power loads of over 50W.
+The price per hour of entertainment could be lowered by providing
+more efficient liquid crystal display (LCD) televisions.
+In addition to increasing the amount of services that the consumer
+can gain for a given amount, these reductions in demand
+reduce the amount of generation and storage needed.
+These demand side improvements can lower the system size and
+deliver the services people want for less power.
+
 
 
 
 
 \section{Summary}
-Hourly demand data for newly electificed communities has been gathered.
-We find that improving no-load and low load power consumption of the
-inverter can reduce storage and generation needs.
-
-Since the storage costs are greater than generation and BOS costs
-for off-grid solar, the largest cost reductions could come from
-Lead Carbon batteries.
-If LFP improvements continue, they could become competitive in the
-future.
+Hourly demand data for newly electrified communities has been gathered.
+We find that improving no-load and low-load power consumption of the
+inverter can reduce storage and generation needs and lower the cost
+of electricity 20\% for many load types.
+Future battery chemistry types have the potential to deliver 50\% 
+reductions in the wholesale cost of electricity to consumers.
 
 
-
-technology \& cost improvement from baseline \\
-slaved inverters    \& xx\% \\
-LFP battery         \& xx\% \\
-Lead Carbon Battery \& xx\% \\
-
-
-%\section{Acknowledgements}
+\section{Acknowledgements}
 
 
 
@@ -678,83 +712,3 @@ Wiley Interscience,
 %---------------------------------------------------------------------------%
 
 
-
-We have measured the load patterns of users and have generated
-load-duration curves over a N-day period.
-From this curve, (Figure \ref{ldc}) we estimate the overall
-efficiency of the inverter.
-$$ \sum p_i / \eta_i $$
-The overall inverter efficiency is much lower than its rated
-efficiency because the inverter is operated for so much time
-at a low fraction of its capacity.
-
-
-%$$ \ppv = insolation \cdot array size \cdot array efficiency
-%         \cdot controller efficiency $$
-
-
-We can simulate the effective inverter efficiency for a given
-load profile and inverter curve.
-
-$$ \eta_{effective} = \frac{\sum P_{AC} \cdot \Delta t}
-                          {\sum P_{AC} /\eta_{inv} \cdot \Delta t} $$
-
-While lithium batteries are a factor of XX more expensive
-than lead-acid batteries based on the capacity of the battery
-(USD/kWh), the cost per delivered watt-hour of electricity
-over the lifetime of the battery is comparable.
-Additional economic improvement is gained by lower weight
-for shipping and improved round trip efficiency which lowers
-both the battery capacity and the generation capacity when nighttime
-loads are needed.
-
-
-\subsection{DC Distribution}
-
-Since both the generation and consumption of electricity in our
-sites is in the form of DC electricity, it is natural to
-question the necessity of the inverter.
-In addition to inefficiency of conversion from DC to AC at the
-generation side and from AC to DC at the consumption side,
-these DC loads have less than unity power factor which further
-lowers the efficiency of the inverter.
-In areas where connection to the grid is extremely unlikely
-in the future, an all DC distribution system is worthy of
-serious consideration.
-
-If the efficiency curve of a DC/DC converter were favorable,
-a high-voltage direct current (HVDC) distribution scheme could
-be used.
-Our testing of a 48 VDC to 12 VDC converter is over 80\% for
-the range of power of interest.
-The no-load dissipation for this device was below our measurement
-capacity of 0.5W.
-
-\subsection{Mitigating Load Variation}
-Systems with better no-load performance should be used to counteract
-the problem of efficiency at the lower end.
-
-Two solutions exist for this problem, the first is to remove
-the constant loads (meter electronics, communication, and
-computing) from the inverter.
-This could allow an inverter to operate in a power-down or
-search mode for most of the time and then switch on only
-to service loads.
-
-\subsection{Slaved inverters}
-A chain of inverters that turn on in a cascaded fashion could
-be more efficient.
-
-\subsection{Inverters with Standby Mode}
-The standby loss could be low but an small use will energize the
-entire system.
-
-
-
-
-\subsection{Distributed Storage}
-Another possibility is local storage at the home with a small inverter
-that the customer only switches on during times when power
-is needed.
-This reduces the standby load to zero but likely adds to the
-fixed cost of the system.
