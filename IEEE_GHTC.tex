@@ -28,22 +28,22 @@ New York, NY  10027}
 \begin{abstract}
 Reaching unelectrified populations in the developing world
 with distributed solar requires agressive cost optimization of
-generation and storage. 
+generation and storage.
 Conventional solar generation architectures using photovoltaic
 panels, sealed lead acid batteries, and inverters show room for
 cost improvement.
 Using data collected from photovoltaic microgrid users and simulations
-we demonstrate potential cost reductions using alternate 
+we demonstrate potential cost reductions using alternate
 technologies and architectures.
 Reducing losses from power conversion could lower wholesale energy
 costs by 20\% while improved battery chemistries could lower
-costs by up to 50\%. 
+costs by up to 50\%.
 \end{abstract}
 
 \section{Introduction}
 
 The cost of renewable and distributed energy systems must be
-optimized to sustainably provide electricity to the customers 
+optimized to sustainably provide electricity to the customers
 beyond the reach of the grid.
 Private energy service companies (ESCOs) may be able to supply power
 where utilities have failed to reach.
@@ -55,16 +55,16 @@ for cost.
 Since these systems are often paid for by the revenue collected
 from electricity sales, these optimizations are important.
 \cite{Lemaire-2011}
-Our previous work has focused on the improved collection of 
+Our previous work has focused on the improved collection of
 tariffs through mobile commerce and prepayment \cite{ICTD}.
 This work will focus on potential cost reductions which allow
 the same level of energy to be delivered for a lower total
 investment and cost per kWh.
 
 Our observations of electricity use in newly electrified villages
-show usage patterns that are difficult to serve efficiently 
+show usage patterns that are difficult to serve efficiently
 with existing technology.
-Our data show that villages whose primary electricity use is 
+Our data show that villages whose primary electricity use is
 lighting, television, and cell phone charging have wide variation
 in power.
 This work presents opportunities for efficiency and therefore
@@ -83,25 +83,25 @@ at a consistent efficiency.
 This decrease in efficiency leads to an increase in both
 generation and storage costs.
 
-Two approaches to mitigation of this load variation exist, 
+Two approaches to mitigation of this load variation exist,
 the first is scheduling or addition of loads that smooth consumption.
 The second approach is developing a power converter architecture
 that is less sensitive to the variation in loads.
-We present data addressing the first approach, where two of our 
+We present data addressing the first approach, where two of our
 sites have added freezers.
 Our microgrid data and simulations show that these daytime loads
 can increase the cost-effectiveness of a microgrid.
 For the second approach we model the cost reductions possible
 for a hypothetical inverter that has a more constant efficiency
 across all loads in its operating range.
-This could be achieved through multiple inverters with 
+This could be achieved through multiple inverters with
 different operating regimes or future improvements in inverter
 technology.
-Although modest gains are available through load management or 
+Although modest gains are available through load management or
 inverter efficiency, larger efficiency
 gains are possible as battery technologies improve.
-In addition to modeling effects of inverter efficiency and load 
-variation, we model the system cost using existing sealed lead acid 
+In addition to modeling effects of inverter efficiency and load
+variation, we model the system cost using existing sealed lead acid
 battery technology and promising Lithium and Lead Carbon
 technologies.
 The improved efficiency and lifetimes of these emerging technologies
@@ -112,19 +112,19 @@ for storage.
 
 \section{Microgrid and Data Description}
 
-The simulations in this paper will use data collected from 
+The simulations in this paper will use data collected from
 Mali.
-This section describes the solar photovoltaic microgrid 
+This section describes the solar photovoltaic microgrid
 systems that this data is taken from.
 It will also describe some of the notable features in the data.
 
 \subsection{Data collection}
-We have installed 17 solar photovoltaic microgrid systems 
+We have installed 17 solar photovoltaic microgrid systems
 with remote connectivity using Short Message Service (SMS)
 over the Global System for Mobile Communications (GSM) networks
 in Mali and Uganda as described in \cite{ICTD}.
-These systems allow customers to purchase bundles of 
-electricity in advance of use either through a scratch card and 
+These systems allow customers to purchase bundles of
+electricity in advance of use either through a scratch card and
 cell phone purchase or through a tablet device.
 Each of these systems consists of a 1.4 kWp array of photovoltaic
 panels with a 48 V, 360 Ah battery bank.
@@ -150,7 +150,7 @@ behavior.
 \subsection{Timeseries Description}
 These messages allow us to create a database of timeseries
 information from the customers.
-In this paper we focus on data from a few microgrids in 
+In this paper we focus on data from a few microgrids in
 Mali that are representative of the demand from rural residential
 customers.
 In these residential settings, the most common appliances are
@@ -195,9 +195,9 @@ on an hourly basis.
 \includegraphics[trim = 0.7in 0.8in 0.7in 1.1in, clip, width=\columnwidth]
 {figures/freezer_profile.pdf}
 \end{center}
-\caption{Circuit with freezer. 
-Each data point is the hourly load for a single day. 
-The absolute variation in power is still significant but the 
+\caption{Circuit with freezer.
+Each data point is the hourly load for a single day.
+The absolute variation in power is still significant but the
 ratio between high and low use is lower.}
 \label{freezer}
 \end{figure}
@@ -244,40 +244,28 @@ while the other does not.
 \subsection{Overall System Efficiency}
 
 We can estimate an overall system efficiency from the
-system-wide usage data and information from the solar 
+system-wide usage data and information from the solar
 controller on photovoltaic energy generation.
 This estimate of the overall efficiency of the system
 is defined as DC power delivered by solar
-power controller divided by the AC power delivered to the system 
+power controller divided by the AC power delivered to the system
 to power both the system electronics and the user loads.
 Our data shows that as the capacity factor of the inverter
 increases, the overall system efficiency improves.
-In sites with a freezer and therefore considerable daily load, 
+In sites with a freezer and therefore considerable daily load,
+the inverter capacity factor is approximately 30\% and
 we see an overall efficiency of 0.88--0.90.
-In a lighting only site, with much less daily load, the overall efficiency
+In a lighting only site, with much less daily load, the capacity
+factor is less than 15\% and the overall efficiency
 is less than 0.70.
 The large variations in loads exhibited by these customers prompted
 us to investigate the impact on system efficiency that these
 variations in loads are causing.
 
-\begin{table}
-\centering
-\begin{tabular}{c c c}
-Meter & System Utilization Factor & System Efficiency \\
-\hline
-Lighting Only & 0.38 & 0.62 \\
-Lighting Only & 0.33 & 0.69 \\
-Freezer & 0.54 & 0.88 \\
-Freezer & 0.55 & 0.90 \\
-\end{tabular}
-\caption{System Utilization and system efficiency}
-\label{efficiency}
-\end{table}
-
 \section{Simulation Description}
 
 We examine the effect of load variation and alternate technologies
-on the size and cost of the system by creating an 
+on the size and cost of the system by creating an
 energy simulation of the system.
 The simulation finds the minimum panel size and battery capacity
 that will meet the demand assuming clear-sky radiation.
@@ -319,7 +307,7 @@ $$ P_{discharge} = \left\{
 			  \end{array}
 			  \right. $$
 %
-Where $\pinv$ is the DC power demanded by the inverter and 
+Where $\pinv$ is the DC power demanded by the inverter and
 $\ppv$ is the power being delivered by the charge controller.
 $\pinv$ is calculated using the efficiency
 of the inverter as a function of AC load according to
@@ -327,7 +315,7 @@ $$ \pinv = \frac{P_{AC}}{\eta_{inv}(P_{AC})} $$
 %
 Where $P_{AC}$ is the hourly power demanded by the consumers of the microgrid.
 
-The difference equation is run in a loop where the 
+The difference equation is run in a loop where the
 panel size in the model is adjusted until the energy remaining
 in the battery at the end of the simulation is equal to the
 energy at the start of the simulation.
@@ -336,15 +324,15 @@ of the battery energy time series.
 A time series trace is shown in Figure \ref{simulation}.
 Once the simulation finds a solution where the starting and final
 storage are equal, the model outputs the minimum battery size
-to meet the storage need at 100\% depth of discharge and the 
+to meet the storage need at 100\% depth of discharge and the
 minimum solar panel size to meet the demand.
-Based on panel size and battery size output along with the 
-assumptions on panel cost and battery cost and life, the model 
-predicts the net present value (NPV) of the system over the 
+Based on panel size and battery size output along with the
+assumptions on panel cost and battery cost and life, the model
+predicts the net present value (NPV) of the system over the
 life of the system.
 In this model we use a 7\% discount factor and a 20-year time
 horizon.
-The battery, inverter, and panel assumptions for these simulations are listed in 
+The battery, inverter, and panel assumptions for these simulations are listed in
 Table \ref{table_battery_assumptions},
 Table \ref{tbl_inverter_assumptions},
 and Table \ref{table_panel_assumptions}.
@@ -354,8 +342,8 @@ and Table \ref{table_panel_assumptions}.
 \includegraphics[trim = 0.0in 0.2in 0.0in 0.5in, clip, width=\columnwidth]{figures/simulation.pdf}
 \end{center}
 \caption{
-Time series of simulation.  
-The DC load of the inverter is plotted along with the solar generation 
+Time series of simulation.
+The DC load of the inverter is plotted along with the solar generation
 as a function of hour.
 The solar panel size is adjusted until the battery energy at the end
 of the simulation is the same as the start value.
@@ -366,10 +354,10 @@ of the simulation is the same as the start value.
 \begin{table*}
 \centering
 \begin{tabular}{ c c c c c }
-Battery Chemistry & Initial Cost & Lifetime & Optimal & Storage \\ 
+Battery Chemistry & Initial Cost & Lifetime & Optimal & Storage \\
                   & (USD/kWh)    & (yr)     & DOD     & Efficiency\\
 Sealed Lead Acid (SLA)       & \$140  & 2  &  50\%  & 75\%  \\
-Lithium Iron Phosphate (LFP) & \$1000 & 6  & 100\%  & 95\%  \\ 
+Lithium Iron Phosphate (LFP) & \$1000 & 6  & 100\%  & 95\%  \\
 Lead Carbon (PbC)            & \$140  & 6  &  50\%  & 75\%  \\
 \end{tabular}
 \caption{Battery Assumptions for Modeling.}
@@ -381,7 +369,7 @@ Lead Carbon (PbC)            & \$140  & 6  &  50\%  & 75\%  \\
 \begin{tabular}{ c c }
 Rated Power               & 750 W \\
 Peak Efficiency           & 94\%  \\
-No-load Power Consumption & 13 W  \\ 
+No-load Power Consumption & 13 W  \\
 \end{tabular}
 \caption{Inverter Assumptions for Modeling.}
 \label{tbl_inverter_assumptions}
@@ -392,7 +380,7 @@ No-load Power Consumption & 13 W  \\
 \centering
 \begin{tabular}{ c c }
 Panel Efficiency       & 13.5\% \\
-Panel Latitude         & 14 N  \\ 
+Panel Latitude         & 14 N  \\
 Panel Cost             & \$1/W  \\
 Panel Lifetime         & 20 years \\
 \end{tabular}
@@ -435,13 +423,13 @@ To demonstrate the effect of the time of day that power
 is consumed on the generation and storage capacity of the system,
 we calculate the panel and battery size for five loads with
 the same total daily energy but occurring at different times of day.
-We define a ``Night'' load that has the entire day's load 
+We define a ``Night'' load that has the entire day's load
 occurring between 6pm and midnight.
-We also define a ``Day'' load that occurs between 9am and 3pm 
+We also define a ``Day'' load that occurs between 9am and 3pm
 and a ``Constant'' load that is evenly spread across the entire day.
 
 In addition to these three hypothetical loads, we also use loads
-representative of the measured customer loads at our microgrids. 
+representative of the measured customer loads at our microgrids.
 The ``Lighting'' village load uses a representative day from one of the
 village microgrids and has a small constant load and a large
 nighttime load.
@@ -454,7 +442,7 @@ Table \ref{tbl_baseline} shows a detailed output of the panel and
 battery sizes and NPV costs over an assumed 20 year lifetime
 which demonstrate the variability of panel size and battery
 size with the type of load.
-Figure \ref{fig_baseline} 
+Figure \ref{fig_baseline}
 shows these results in terms of an estimated cost of delivered
 electricity.
 Only in the ``Day'' load is the generation cost a significant
@@ -463,7 +451,7 @@ There are variations in the size and price of the panel
 necessary to meet the load, but the cost impact is small
 compared to the storage costs.
 For the other loads, the storage cost is dominant.
-Note that we do not include balance of system costs or 
+Note that we do not include balance of system costs or
 distribution costs since these will be much less sensitive
 to these load types.
 The lowest total cost is delivered for the ``Day'' load
@@ -476,7 +464,7 @@ the storage demand is the greatest.
 \begin{center}
 \includegraphics[width=\columnwidth]{figures/baseline.pdf}
 \end{center}
-\caption{Cost of electricity for different load profiles using Baseline 
+\caption{Cost of electricity for different load profiles using Baseline
 inverter and battery system and hypothetical and measured loads.}
 \label{fig_baseline}
 \end{figure}
@@ -526,7 +514,7 @@ results.
 The increase in inverter efficiency reduces the generation
 and storage needed for four of the five load types.
 The reductions in battery NPV and solar NPV could offset the
-additional cost of a dedicated low-power inverter with a 
+additional cost of a dedicated low-power inverter with a
 cross-over circuit for when the load requires the high-power inverter.
 Figure \ref{fig_inverter}
 shows the impact on delivered price for the five loads we
@@ -536,7 +524,7 @@ consider in this work.
 \begin{center}
 \includegraphics[width=\columnwidth]{figures/inverter.pdf}
 \end{center}
-\caption{Cost of electricity for different load profiles using Baseline 
+\caption{Cost of electricity for different load profiles using Baseline
 inverter and battery system and hypothetical and measured loads.}
 \label{fig_inverter}
 \end{figure}
@@ -544,16 +532,23 @@ inverter and battery system and hypothetical and measured loads.}
 \begin{table*}
 \centering
 \begin{tabular}{c c c c c}
-Configuration & Panel Capacity & Minimum Battery & Battery NPV & Solar NPV \\
+Load Type     & Panel Capacity & Minimum Battery & Battery NPV & Solar NPV \\
               & (kWp)          & Size (kWh)      & (USD)       & (USD)     \\
 \hline
-% village simulation f19442 table_3
-flat day lead acid             & 0.50 & 0.88 & 1509 & 498 \\
-flat night lead acid           & 0.62 & 4.26 & 7289 & 621 \\
-flat continuous lead acid      & 0.53 & 2.33 & 3993 & 532 \\
-flat village lead acid         & 0.55 & 2.81 & 4819 & 553 \\
+% table_inverter
+% 2012-05-09 07:42
+% 3e30fa
+Day        & 0.50 & 0.88 & 1509 & 498 \\
+Night      & 0.62 & 4.26 & 7289 & 621 \\
+Continuous & 0.53 & 2.33 & 3993 & 532 \\
+Lighting   & 0.55 & 2.81 & 4819 & 553 \\
+Freezer    & 0.53 & 2.44 & 4176 & 532 \\
+
 \end{tabular}
-\caption{Impact of inverter non-ideality on system size}
+\caption{Impact of inverter non-ideality on system size.  
+Simulations use single-point efficiency inverter and 
+SLA battery.
+Loads are normalized to 3.0 kWh daily.}
 \label{table_inverter}
 \end{table*}
 
@@ -576,7 +571,7 @@ The incumbent battery technology is sealed lead acid (SLA).
 Emerging technologies of interest are Lithium Iron Phosphate
 (LFP) and Lead Carbon (PbC).
 
-Relative to SLA batteries, LFP batteries 
+Relative to SLA batteries, LFP batteries
 have better cycle life, higher specific cost, and better
 turnaround efficiency.
 PbC batteries are not yet mature but promise improved cycle
@@ -593,12 +588,12 @@ Where $E_{storage}$ is the storage necessary, $\eta_B$ is the
 round trip energy efficiency, $DOD_{optimal}$ is the desired
 operating point of the battery for long life, and $c_B$ is the
 initial cost of the battery per kWh.
-A very important metric however is the life cycle cost of the 
+A very important metric however is the life cycle cost of the
 battery replacement which depends on the cycle life of the battery.
 
-The life cycle cost is the net present value (NPV) of the 
-initial and replacement battery expenditures over the life 
-of the system.  
+The life cycle cost is the net present value (NPV) of the
+initial and replacement battery expenditures over the life
+of the system.
 In this simulation we use a 7\% discount factor and a 20-year
 system lifetime.
 The baseline inverter is used in these simulations.
@@ -607,10 +602,10 @@ We simulate the impact of these on system size and total cost
 in Table \ref{table_battery}.
 Figure \ref{fig_battery} shows the impact of battery type on
 the per kWh cost of electricity.
-For the case of typical village data, the lifetime cost of 
+For the case of typical village data, the lifetime cost of
 lead acid and LFP are similar.
 If LFP costs reach the \$500/kWh cost targets mentioned in
-the context of electric vehicles, these batteries will 
+the context of electric vehicles, these batteries will
 be a clear choice.
 If PbC batteries are able to maintain their cost while
 improving cycle life, they will provide a clear improvement
@@ -630,34 +625,52 @@ to emerging battery technologies is worthwhile.
 
 \begin{table*}[!t]
 \centering
-\begin{tabular}{ c c c c c }
-Configuration & Panel Capacity & Minimum Battery & Battery NPV & Solar NPV \\
-              & (kWp)          & Size (kWh)      & (USD)       & (USD)     \\
+\begin{tabular}{ c c c c c c }
+Load Type & Battery & Panel Capacity & Minimum Battery & Battery NPV & Solar NPV \\
+          & Type    & (kWp)          & Size (kWh)      & (USD)       & (USD)     \\
 \hline
-%table 5
-% village simulation c4e80b table_5()
-typical village lead acid      & 0.73 & 3.66 & 6270 & 727 \\
-typical village LFP            & 0.62 & 2.93 & 7043 & 615 \\
-typical village lead carbon    & 0.73 & 3.66 & 2466 & 727 \\
+% table_5()
+% 2012-05-09 07:29
+% git commit a49634
+%Day & SLA          & 0.59 & 0.76 & 1306 & 595 \\
+%Day & LFP                & 0.57 & 0.76 & 1824 & 566 \\
+%Day & PbC        & 0.59 & 0.76 & 514 & 595 \\
+%
+%Night & SLA        & 0.74 & 4.92 & 8421 & 738 \\
+%Night & LFP              & 0.59 & 3.88 & 9338 & 587 \\
+%Night & PbC      & 0.74 & 4.92 & 3312 & 738 \\
+%
+%Continuous & SLA   & 0.70 & 3.08 & 5281 & 704 \\
+%Continuous & LFP         & 0.61 & 2.46 & 5931 & 609 \\
+%Continuous & PbC & 0.70 & 3.08 & 2077 & 704 \\
+
+Lighting & SLA     & 0.73 & 3.66 & 6270 & 727 \\
+Lighting & LFP           & 0.62 & 2.93 & 7043 & 615 \\
+Lighting & PbC   & 0.73 & 3.66 & 2466 & 727 \\
+
+Freezer & SLA      & 0.70 & 3.21 & 5500 & 703 \\
+Freezer & LFP            & 0.61 & 2.57 & 6186 & 606 \\
+Freezer & PbC    & 0.70 & 3.21 & 2163 & 703 \\
+
 \end{tabular}
 \caption{Simulation results for battery chemistries.
-Net present value is calculated at 7\% over 20 year 
+Net present value is calculated at 7\% over 20 year
 time horizon.}
 \label{table_battery}
 \end{table*}
 
 
 \section{Discussion / Future Work}
-While the simulation results discussed are speculative, 
+While the simulation results discussed are speculative,
 we believe that experimentation in this regime is important.
 We have emphasized supply and generation optimizations in
-this work but would like to point out the importance of 
+this work but would like to point out the importance of
 efficient appliances.
 Efficient appliances allow services to be delivered at the
 lowest possible price.
 Our microgrids use LED lighting to achieve the best cost for
 lighting in terms of price per kilolumen-hour delivered.
-The televisions that we have observed in these microgrids 
+The televisions that we have observed in these microgrids
 have been inefficient cathode ray tube (CRT) televisions
 with power loads of over 50W.
 The price per hour of entertainment could be lowered by providing
@@ -668,19 +681,20 @@ reduce the amount of generation and storage needed.
 These demand side improvements can lower the system size and
 deliver the services people want for less power.
 
-In addition to improving the efficiency of the end-uses of 
-the system, efficiency can be gained by some architectural 
+In addition to improving the efficiency of the end-uses of
+the system, efficiency can be gained by some architectural
 choices.
 Casillas and Kammen show that the introduction of meters
 to a rural microgrid lowered usage \cite{Casillas-2010}.
 Thomas and coauthors estimate that LED lighting using DC
-building circuits lower costs relative to AC connected 
+building circuits lower costs relative to AC connected
 LED circuits \cite{EdisonRevisited}.
 Since all loads in our residential areas are DC loads,
 AC inverter costs and inefficiencies may be unnecessary.
-Hosman is designing DC only laptop charging stations 
-for schools that view the inverter as superfluous 
-\cite{Hosman}.
+The IEEE/Sirona Haiti Rural Electric Project \cite{Sirona}
+uses only
+DC circuitry and Hosman is designing DC only laptop charging stations
+for schools \cite{Hosman}.
 
 
 
@@ -689,7 +703,7 @@ Hourly demand data for newly electrified communities has been gathered.
 We find that improving no-load and low-load power consumption of the
 inverter can reduce storage and generation needs and lower the cost
 of electricity 20\% for many load types.
-Future battery chemistry types have the potential to deliver 50\% 
+Future battery chemistry types have the potential to deliver 50\%
 reductions in the wholesale cost of electricity to consumers.
 
 
@@ -717,7 +731,7 @@ Wiley Interscience,
 
 \bibitem{Lemaire-2011}
 X. Lemaire,
-``Off-grid electrification with solar home systems: 
+``Off-grid electrification with solar home systems:
 The experience of a fee-for-service concession in South Africa'',
 Energy for Sustainable Development,
 Vol 15, pp. 277--283, 2011,
@@ -732,7 +746,7 @@ Vol. 39, pp. 4520--4528, 2011,
 
 \bibitem{EdisonRevisited}
 B.A. Thomas, I. L. Azevedo, G. Morgan,
-``Edison Revisited: 
+``Edison Revisited:
 Should we use DC circuits for lighting in commercial buildings?'',
 Energy Policy,
 Vol. 45, pp. 399--411, 2012
