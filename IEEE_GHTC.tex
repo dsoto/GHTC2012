@@ -354,11 +354,11 @@ of the simulation is the same as the start value.
 \begin{table*}
 \centering
 \begin{tabular}{ c c c c c }
-Battery Chemistry & Initial Cost & Lifetime & Optimal & Storage \\
-                  & (USD/kWh)    & (yr)     & DOD     & Efficiency\\
-Sealed Lead Acid (SLA)       & \$140  & 2  &  50\%  & 75\%  \\
-Lithium Iron Phosphate (LFP) & \$1000 & 6  & 100\%  & 95\%  \\
-Lead Carbon (PbC)            & \$140  & 6  &  50\%  & 75\%  \\
+Battery Chemistry            & Initial Cost & Lifetime & Optimal & Storage    \\
+                             & (USD/kWh)    & (yr)     & DOD     & Efficiency \\
+Sealed Lead Acid (SLA)       & \$140        & 2        &  50\%   & 75\%       \\
+Lithium Iron Phosphate (LFP) & \$1000       & 6        & 100\%   & 95\%       \\
+Lead Carbon (PbC)            & \$140        & 6        &  50\%   & 75\%       \\
 \end{tabular}
 \caption{Battery Assumptions for Modeling.}
 \label{table_battery_assumptions}
@@ -379,10 +379,10 @@ No-load Power Consumption & 13 W  \\
 \begin{table}
 \centering
 \begin{tabular}{ c c }
-Panel Efficiency       & 13.5\% \\
-Panel Latitude         & 14 N  \\
-Panel Cost             & \$1/W  \\
-Panel Lifetime         & 20 years \\
+Panel Efficiency & 13.5\%   \\
+Panel Latitude   & 14 N     \\
+Panel Cost       & \$1/W    \\
+Panel Lifetime   & 20 years \\
 \end{tabular}
 \caption{Solar Panel Assumptions for Modeling.}
 \label{table_panel_assumptions}
@@ -476,10 +476,10 @@ Configuration & Panel Capacity & Minimum Battery & Battery NPV & Solar NPV \\
               & (kWp)          & Size (kWh)      & (USD)       & (USD)     \\
 \hline
 % village_simulation 845102 table_2()
-typical day lead acid          & 0.59 & 0.76 & 1306 & 595 \\
-typical night lead acid        & 0.74 & 4.92 & 8421 & 738 \\
-typical continuous lead acid   & 0.70 & 3.08 & 5281 & 704 \\
-typical village lead acid      & 0.73 & 3.66 & 6270 & 727 \\
+typical day lead acid        & 0.59 & 0.76 & 1306 & 595 \\
+typical night lead acid      & 0.74 & 4.92 & 8421 & 738 \\
+typical continuous lead acid & 0.70 & 3.08 & 5281 & 704 \\
+typical village lead acid    & 0.73 & 3.66 & 6270 & 727 \\
 \end{tabular}
 \caption{Impact of load time-of-day on system size.
 Loads are normalized to 3.0 kWh per day.}
@@ -545,8 +545,8 @@ Lighting   & 0.55 & 2.81 & 4819 & 553 \\
 Freezer    & 0.53 & 2.44 & 4176 & 532 \\
 
 \end{tabular}
-\caption{Impact of inverter non-ideality on system size.  
-Simulations use single-point efficiency inverter and 
+\caption{Impact of inverter non-ideality on system size.
+Simulations use single-point efficiency inverter and
 SLA battery.
 Loads are normalized to 3.0 kWh daily.}
 \label{table_inverter}
@@ -556,7 +556,7 @@ Loads are normalized to 3.0 kWh daily.}
 
 The largest potential for cost reduction can come from improved
 battery technologies.
-Current lead acid technologies lasting 500--1000 cycles, must be 
+Current lead acid technologies lasting 500--1000 cycles, must be
 replaced every 2--3 years depending on the environment.
 In terms of initial cost, batteries are comparable to the photovoltaic
 panel cost but their frequent replacement makes the storage cost
@@ -632,25 +632,25 @@ Load Type & Battery & Panel Capacity & Minimum Battery & Battery NPV & Solar NPV
 % table_5()
 % 2012-05-09 07:29
 % git commit a49634
-%Day & SLA          & 0.59 & 0.76 & 1306 & 595 \\
-%Day & LFP                & 0.57 & 0.76 & 1824 & 566 \\
-%Day & PbC        & 0.59 & 0.76 & 514 & 595 \\
+%Day        & SLA & 0.59 & 0.76 & 1306 & 595 \\
+%Day        & LFP & 0.57 & 0.76 & 1824 & 566 \\
+%Day        & PbC & 0.59 & 0.76 & 514  & 595 \\
 %
-%Night & SLA        & 0.74 & 4.92 & 8421 & 738 \\
-%Night & LFP              & 0.59 & 3.88 & 9338 & 587 \\
-%Night & PbC      & 0.74 & 4.92 & 3312 & 738 \\
+%Night      & SLA & 0.74 & 4.92 & 8421 & 738 \\
+%Night      & LFP & 0.59 & 3.88 & 9338 & 587 \\
+%Night      & PbC & 0.74 & 4.92 & 3312 & 738 \\
 %
-%Continuous & SLA   & 0.70 & 3.08 & 5281 & 704 \\
-%Continuous & LFP         & 0.61 & 2.46 & 5931 & 609 \\
+%Continuous & SLA & 0.70 & 3.08 & 5281 & 704 \\
+%Continuous & LFP & 0.61 & 2.46 & 5931 & 609 \\
 %Continuous & PbC & 0.70 & 3.08 & 2077 & 704 \\
 
-Lighting & SLA     & 0.73 & 3.66 & 6270 & 727 \\
-Lighting & LFP           & 0.62 & 2.93 & 7043 & 615 \\
-Lighting & PbC   & 0.73 & 3.66 & 2466 & 727 \\
+Lighting    & SLA & 0.73 & 3.66 & 6270 & 727 \\
+Lighting    & LFP & 0.62 & 2.93 & 7043 & 615 \\
+Lighting    & PbC & 0.73 & 3.66 & 2466 & 727 \\
 
-Freezer & SLA      & 0.70 & 3.21 & 5500 & 703 \\
-Freezer & LFP            & 0.61 & 2.57 & 6186 & 606 \\
-Freezer & PbC    & 0.70 & 3.21 & 2163 & 703 \\
+Freezer     & SLA & 0.70 & 3.21 & 5500 & 703 \\
+Freezer     & LFP & 0.61 & 2.57 & 6186 & 606 \\
+Freezer     & PbC & 0.70 & 3.21 & 2163 & 703 \\
 
 \end{tabular}
 \caption{Simulation results for battery chemistries.
